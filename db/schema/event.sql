@@ -1,0 +1,8 @@
+CREATE TABLE event (
+    id INT NOT NULL AUTO_INCREMENT,
+    customer_id VARCHAR(255) NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    timestamp DATETIME NOT NULL,
+		value FLOAT NOT NULL,
+    PRIMARY KEY (id)
+);

@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS event (
+		id INT NOT NULL AUTO_INCREMENT,
+		customer_id VARCHAR(255) NOT NULL,
+		code VARCHAR(255) NOT NULL,
+		timestamp DATETIME NOT NULL,
+		properties JSON NOT NULL,
+		PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS authors (
+	id   BIGINT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name text    NOT NULL,
+	bio  text
+);
+
+CREATE TABLE IF NOT EXISTS billing_metric (
+		id INT NOT NULL AUTO_INCREMENT,
+		name VARCHAR(255) NOT NULL,
+		code VARCHAR(255) NOT NULL,
+		aggregation ENUM('SUM', 'COUNT') NOT NULL,
+		field_name VARCHAR(255) NOT NULL,
+		PRIMARY KEY (id)
+);
