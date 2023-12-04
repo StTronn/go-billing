@@ -116,3 +116,35 @@ func (q *Queries) SumEventsByCustomerIdAndCodeName(ctx context.Context, arg SumE
 	err := row.Scan(&i.CustomerID, &i.Code, &i.Sum)
 	return i, err
 }
+
+const sumEventsByCustomerIdCodeNameStartRangeAndEndRange = `-- name: SumEventsByCustomerIdCodeNameStartRangeAndEndRange :one
+SELECT customer_id, code, CAST(SUM(value) AS FLOAT) AS sum
+FROM event
+WHERE customer_id = ? AND code = ? AND value <= ? AND value >= ?
+GROUP BY customer_id, code
+`
+
+type SumEventsByCustomerIdCodeNameStartRangeAndEndRangeParams struct {
+	CustomerID string
+	Code       string
+	Value      float64
+	Value_2    float64
+}
+
+type SumEventsByCustomerIdCodeNameStartRangeAndEndRangeRow struct {
+	CustomerID string
+	Code       string
+	Sum        float64
+}
+
+func (q *Queries) SumEventsByCustomerIdCodeNameStartRangeAndEndRange(ctx context.Context, arg SumEventsByCustomerIdCodeNameStartRangeAndEndRangeParams) (SumEventsByCustomerIdCodeNameStartRangeAndEndRangeRow, error) {
+	row := q.db.QueryRowContext(ctx, sumEventsByCustomerIdCodeNameStartRangeAndEndRange,
+		arg.CustomerID,
+		arg.Code,
+		arg.Value,
+		arg.Value_2,
+	)
+	var i SumEventsByCustomerIdCodeNameStartRangeAndEndRangeRow
+	err := row.Scan(&i.CustomerID, &i.Code, &i.Sum)
+	return i, err
+}

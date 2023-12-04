@@ -18,3 +18,9 @@ SELECT customer_id, code, COUNT(*) AS count
 FROM event
 WHERE customer_id = ? AND code = ?
 GROUP BY customer_id, code;
+
+-- name: SumEventsByCustomerIdCodeNameStartRangeAndEndRange :one
+SELECT customer_id, code, CAST(SUM(value) AS FLOAT) AS sum
+FROM event
+WHERE customer_id = ? AND code = ? AND value <= ? AND value >= ?
+GROUP BY customer_id, code;

@@ -1,21 +1,14 @@
 package core
 
-type Aggregation int
+// type BillingMetric struct {
+// 	Name        string
+// 	Code        string
+// 	Aggregation Aggregation
+// 	FieldName   string
+// }
 
-const (
-	SUM Aggregation = iota
-	COUNT
-)
-
-type BillingMetric struct {
-	Name        string
-	Code        string
-	Aggregation Aggregation
-	FieldName   string
-}
-
-type Sum struct {
-}
+// type Sum struct {
+// }
 
 // func (s Sum) aggregate(events []Event, billingMetric BillingMetric) (float64, error) {
 
